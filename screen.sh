@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 red(){ echo -e "\033[31m$1\033[0m";}
-yellow(){ echo -e "\033[37m$1\033[0m";}
+yellow(){ echo -e "\033[33m$1\033[0m";}
 blue(){ echo -e "\033[36m$1\033[0m";}
 readp(){ read -p "$(yellow "$1")" $2;}
 
