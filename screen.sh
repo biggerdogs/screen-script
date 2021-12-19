@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 red(){ echo -e "\033[31m$1\033[0m";}
-white(){ echo -e "\033[37m$1\033[0m";}
+yellow(){ echo -e "\033[37m$1\033[0m";}
 blue(){ echo -e "\033[36m$1\033[0m";}
-readp(){ read -p "$(white "$1")" $2;}
+readp(){ read -p "$(yellow "$1")" $2;}
 
+yellow "===================================================================="
 blue "简单小白的Screen脚本，项目地址：https://github.com/kkkyg/screen-script"
 blue "YouTube频道：甬哥侃侃侃"
+yellow "===================================================================="
 
 [[ $(type -P yum) ]] && yumapt='yum -y' || yumapt='apt -y'
 [[ $(type -P screen) ]] || (yellow "检测到screen未安装，升级安装中" && $yumapt install screen)	   
