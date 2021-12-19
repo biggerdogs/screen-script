@@ -15,9 +15,9 @@ yellow "===================================================================="
 [[ $(type -P yum) ]] && yumapt='yum -y' || yumapt='apt -y'
 [[ $(type -P screen) ]] || (yellow "检测到screen未安装，升级安装中" && $yumapt install screen)	   
 
-upm="1.创建screen窗口程序名称\n2.查看并进入指定screen窗口\n3.查看并删除指定screen窗口\n4.清除screen所有窗口\n0.退出\n 请选择："
-readp "$upm" show
-case "$show" in 
+ab="1.创建screen窗口程序名称\n2.查看并进入指定screen窗口\n3.查看并删除指定screen窗口\n4.清除所有screen窗口\n0.退出\n 请选择："
+readp "$ab" cd
+case "$cd" in 
 1 )
 readp "为方便管理，设置screen窗口程序名称：" screen
 screen -S $screen
