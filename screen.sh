@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+red(){ echo -e "\033[31m\033[01m$1\033[0m";}
+white(){ echo -e "\033[37m\033[01m$1\033[0m";}
+readp(){ read -p "$(white "$1")" $2;}
+
+[[ $(type -P yum) ]] && yumapt='yum -y' || yumapt='apt -y'
+[[ $(type -P screen) ]] || (yellow "检测到screen未安装，升级安装中" && $yumapt install screen)	   
+
+upm="1.创建screen窗口程序名称\n2.查看并进入指定screen窗口\n3.查看并删除指定screen窗口\n4.清除screen所有窗口\n 请选择："
+readp "$upm" show
+case "$show" in 
+1 )
+readp "设置名称：" screen
+screen -S $screen
+;;
+2 )
+names=`screen -ls | grep '(Detached)' | awk '{print $1}' | awk -F "." '{print $2}'`
+[[ -n $names ]] && green "$names" && readp "输入进入窗口的名称：" screename && screen -r $screename || red "无执行内容"
+;;
+3 )
+names=`screen -ls | grep '(Detached)' | awk '{print $1}' | awk -F "." '{print $2}'`
+[[ -n $names ]] && green "$names" && readp "输入删除窗口的名称：" screename && screen -S $screename -X quit || red "无执行内容"
+;;
+4 )
+names=`screen -ls | grep '(Detached)' | awk '{print $1}' | awk -F "." '{print $2}'`
+[[ -n $names ]] && screen -ls | grep '(Detached)' | cut -d. -f1 | awk '{print $1}' | xargs kill && green "清除完毕"|| red "无执行内容，无须清除"
+esac
