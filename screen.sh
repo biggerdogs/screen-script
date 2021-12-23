@@ -33,6 +33,7 @@ names=`screen -ls | grep '(Detached)' | awk '{print $1}' | awk -F "." '{print $2
 ;;
 4 )
 names=`screen -ls | grep '(Detached)' | awk '{print $1}' | awk -F "." '{print $2}'`
+screen -wipe
 [[ -n $names ]] && screen -ls | grep '(Detached)' | cut -d. -f1 | awk '{print $1}' | xargs kill && green "所有screen窗口清除完毕"|| red "无执行内容，无须清除"
 ;;
 0 ) exit 0
